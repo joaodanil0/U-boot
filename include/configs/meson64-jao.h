@@ -88,19 +88,16 @@
 
 #ifndef CFG_EXTRA_ENV_SETTINGS
 #define CFG_EXTRA_ENV_SETTINGS \
-	"stdin=" STDIN_CFG "\0" \
-	"stdout=" STDOUT_CFG "\0" \
-	"stderr=" STDOUT_CFG "\0" \
-	"kernel_comp_addr_r=0x0d080000\0" \
-	"kernel_comp_size=0x2000000\0" \
-	"fdt_addr_r=0x08008000\0" \
-	"scriptaddr=0x08000000\0" \
-	"kernel_addr_r=0x08080000\0" \
-	"pxefile_addr_r=0x01080000\0" \
-	"fdtoverlay_addr_r=0x01000000\0" \
-	"ramdisk_addr_r=0x13000000\0" \
-	"fdtfile=amlogic/" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
-	BOOTENV
+	"serverip=192.168.0.3\0" \
+    "ipaddr=192.168.0.104\0" \
+    "env_loadaddr=0x20000000\0" \
+    "distro_bootcmd=" \
+        "if tftpboot ${env_loadaddr} env.txt; then " \
+            "echo Loading env.txt...; " \
+            "env import -t ${env_loadaddr} ${filesize}; " \
+            "echo loaded!; " \
+            "run agora_vai; "\
+            "fi\0"
 #endif
 
 
